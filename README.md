@@ -66,7 +66,7 @@
 - 이 객체는 `type`값을 **반드시 가지고 있어야** 합니다.
 - 액션 타입은 해당 액션이 어떤 작업을 하는 액션인지 정의하며, **대문자와 밑줄**을 조합하여 만듭니다.
 
-```json
+```js
 {
     type: "CHECK",
     text: "리덕스 배우기~~"
@@ -213,7 +213,7 @@ unsubscribe();
 store.dispatch(increment(2e6));
 ```
 
-```json
+```js
 [object Object] {
   baz: "qux",
   foo: "bar",
