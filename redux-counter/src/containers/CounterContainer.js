@@ -1,27 +1,7 @@
-import Counter from '../components/ Counter';
+import CounterList from '../components/CounterList';
 import * as actions from '../actions';
 import {connect} from 'react-redux';
-
-export function getRandomColor() {
-    const colors = [
-        '#495057',
-        '#f03e3e',
-        '#d6336c',
-        '#ae3ec9',
-        '#7048e8',
-        '#4263eb',
-        '#1c6cd6',
-        '#1098ad',
-        '#0ca678',
-        '#37b24d',
-        '#74b816',
-        '#f59f00',
-        '#f76707'
-    ];
-
-    const random = Math.floor(Math.random() * 13);
-    return colors[random];
-}
+import getRandomColor from '../lib/getRandomColor';
 
 /**
  * 
@@ -29,8 +9,7 @@ export function getRandomColor() {
  * store 안의 state 값을 props로 연결합니다.
  */
 const mapStateToProps = (state) => ({
-    color: state.color,
-    number: state.number
+    counters: state.counters
 });
 
 /**
@@ -40,11 +19,11 @@ const mapStateToProps = (state) => ({
  * 해당 액션을 dispatch하는 함수를 만든 후 이를 props로 연결합니다.
  */
 const mapDispatchToProps = (dispatch) => ({
-    onIncrement: () => dispatch(actions.increment()),
-    onDecrement: () => dispatch(actions.decrement()),
-    onSetColor: () => {
+    onIncrement: (index) => dispatch(actions.increment(index)),
+    onDecrement: (index) => dispatch(actions.decrement(index)),
+    onSetColor: (index) => {
         const color = getRandomColor();
-        dispatch(actions.setColor(color));
+        dispatch(actions.setColor({index, color}));
     }
 });
 
@@ -55,6 +34,6 @@ const mapDispatchToProps = (dispatch) => ({
 const CounterContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Counter);
+)(CounterList);
 
 export default CounterContainer;
